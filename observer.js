@@ -2,9 +2,9 @@ var observer = (function (O) {'use strict';
 
   /*! (C) 2017 Andrea Giammarchi - MIT Style License */
   var
-    empty = {},
     ADD_EVENT = 'addEventListener',
     REMOVE_EVENT = 'removeEventListener',
+    empty = {},
     wm = new WeakMap(),
     hOP = empty.hasOwnProperty,
     dP = O.defineProperty,
@@ -26,54 +26,52 @@ var observer = (function (O) {'use strict';
 
   function createWatcher(object, observer, prop) {
     var
+      set = function ($) {
+        var i, length, old;
+        if (this === object) {
+          if (value !== $) {
+            old = value;
+            value = $;
+            setter.call(object, value);
+            i = 0;
+            length = callbacks.length;
+            while (i < length)
+              callbacks[i++].call(object, prop, old, value);
+          }
+        } else {
+          setter.call(this, value);
+        }
+      },
       callbacks = [],
       descriptor = gD(object, prop) || empty,
       value = descriptor.value,
-      setter = descriptor.set || function ($) { value = $; },
-      watcher = {
-        _: callbacks,
-        d: descriptor === empty ? null : descriptor,
-        handleEvent: function (e) {
-          set.call(e.target, object[prop]);
-        },
-        configurable: hOP.call(descriptor, 'configurable') ?
-          descriptor.configurable :
-          true,
-        enumerable: hOP.call(descriptor, 'enumerable') ?
-          descriptor.enumerable :
-          (prop.charAt(0) === '_'),
-        get: descriptor.get || function () { return value; },
-        set: set
-      }
+      setter = descriptor.set || function ($) { value = $; }
     ;
-
-    function set($) {
-      var i, length, old;
-      if (this === object) {
-        if (value !== $) {
-          old = value;
-          value = $;
-          setter.call(object, value);
-          i = 0;
-          length = callbacks.length;
-          while (i < length)
-            callbacks[i++].call(object, prop, old, value);
-        }
-      } else {
-        setter.call(this, value);
-      }
-    }
-
-    return (observer[prop] = watcher);
+    return (observer[prop] = {
+      _: callbacks,
+      d: descriptor === empty ? null : descriptor,
+      handleEvent: function (e) {
+        set.call(e.target, object[prop]);
+      },
+      configurable: hOP.call(descriptor, 'configurable') ?
+        descriptor.configurable :
+        true,
+      enumerable: hOP.call(descriptor, 'enumerable') ?
+        descriptor.enumerable :
+        (Strng(prop).charAt(0) !== '_'),
+      get: descriptor.get || function () { return value; },
+      set: set
+    });
   }
 
   function unwatch(object, prop, callback) {
     var observer = wm.get(object), i, watcher;
-    if (observer) {
+    if (observer && prop in observer) {
       watcher = observer[prop];
       i = watcher._.indexOf(callback);
       if (-1 < i) watcher._.splice(i, 1);
       if (watcher._.length < 1) {
+        delete observer[prop];
         if (watcher.d) {
           dP(object, prop, watcher.d);
         } else {
