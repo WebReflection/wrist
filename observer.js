@@ -44,8 +44,10 @@ var observer = (function (O) {'use strict';
       },
       callbacks = [],
       descriptor = gD(object, prop) || empty,
-      value = descriptor.value,
-      setter = descriptor.set || function ($) { value = $; }
+      getter = descriptor.get || function () { return value; },
+      setter = descriptor.set || function ($) { value = $; },
+      value = hOP.call(descriptor, 'value') ?
+        descriptor.value : getter.call(object)
     ;
 
     return (observer[prop] = {
@@ -58,7 +60,7 @@ var observer = (function (O) {'use strict';
       enumerable: hOP.call(descriptor, 'enumerable') ?
         descriptor.enumerable :
         (String(prop).charAt(0) !== '_'),
-      get: descriptor.get || function () { return value; },
+      get: getter,
       set: set
     });
   }
