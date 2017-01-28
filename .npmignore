@@ -1,0 +1,6 @@
+node_modules/*
+.travis.yml
+.gitignore
+index.html
+test.html
+test.js
