@@ -4,8 +4,19 @@ var observer = (function (O) {'use strict';
   var
     ADD_EVENT = 'addEventListener',
     REMOVE_EVENT = 'removeEventListener',
+    SECRET = '__oO()' + Math.random(),
     empty = {},
-    wm = new WeakMap(),
+    wm = typeof WeakMap == 'function' ?
+      new WeakMap() :
+      {
+        get: function (a, b) {
+          return hOP.call(a, SECRET) ?
+            a[SECRET] : b;
+        },
+        set: function (a, b) {
+          dP(a, SECRET, {value: b});
+        }
+      },
     hOP = empty.hasOwnProperty,
     dP = O.defineProperty,
     gOPD = O.getOwnPropertyDescriptor,
