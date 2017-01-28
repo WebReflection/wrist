@@ -47,18 +47,17 @@ var observer = (function (O) {'use strict';
       value = descriptor.value,
       setter = descriptor.set || function ($) { value = $; }
     ;
+
     return (observer[prop] = {
+      // ignored descriptor properties
       _: callbacks,
       d: descriptor === empty ? null : descriptor,
-      handleEvent: function (e) {
-        set.call(e.target, object[prop]);
-      },
-      configurable: hOP.call(descriptor, 'configurable') ?
-        descriptor.configurable :
-        true,
+      h: function (e) { set.call(e.target, object[prop]); },
+      // regular descriptors properties
+      configurable: true,
       enumerable: hOP.call(descriptor, 'enumerable') ?
         descriptor.enumerable :
-        (Strng(prop).charAt(0) !== '_'),
+        (String(prop).charAt(0) !== '_'),
       get: descriptor.get || function () { return value; },
       set: set
     });
@@ -79,8 +78,8 @@ var observer = (function (O) {'use strict';
           object[prop] = watcher.get.call(object);
         }
         if (REMOVE_EVENT in object) {
-          object[REMOVE_EVENT]('change', watcher, false);
-          object[REMOVE_EVENT]('input', watcher, false);
+          object[REMOVE_EVENT]('change', watcher.h, false);
+          object[REMOVE_EVENT]('input', watcher.h, false);
         }
       }
     }
@@ -97,8 +96,8 @@ var observer = (function (O) {'use strict';
         callbacks.push(callback);
         dP(object, prop, watcher);
         if (ADD_EVENT in object) {
-          object[ADD_EVENT]('change', watcher, false);
-          object[ADD_EVENT]('input', watcher, false);
+          object[ADD_EVENT]('change', watcher.h, false);
+          object[ADD_EVENT]('input', watcher.h, false);
         }
       }
       return {unwatch: unwatch.bind(null, object, prop, callback)};
