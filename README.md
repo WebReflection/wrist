@@ -24,6 +24,10 @@ watcher.unwatch();
 observer.unwatch(generic, 'propName', cb);
 ```
 
-Each propName can have more than callback registered.
+Each property name can have more than callback registered.
+
+Dual bindings do not interfere with each other.
+
+- - -
 
 (C) 2017 Andrea Giammarchi - MIT Style License
