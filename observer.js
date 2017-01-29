@@ -1,22 +1,10 @@
+/*! (C) 2017 Andrea Giammarchi - MIT Style License */
 var observer = (function (O) {'use strict';
-
-  /*! (C) 2017 Andrea Giammarchi - MIT Style License */
   var
     ADD_EVENT = 'addEventListener',
     REMOVE_EVENT = 'removeEventListener',
     SECRET = '__oO()' + Math.random(),
     empty = {},
-    wm = typeof WeakMap == 'function' ?
-      new WeakMap() :
-      {
-        get: function (a, b) {
-          return hOP.call(a, SECRET) ?
-            a[SECRET] : b;
-        },
-        set: function (a, b) {
-          dP(a, SECRET, {value: b});
-        }
-      },
     hOP = empty.hasOwnProperty,
     dP = O.defineProperty,
     gOPD = O.getOwnPropertyDescriptor,
@@ -26,11 +14,25 @@ var observer = (function (O) {'use strict';
         while (o && !hOP.call(o, p)) o = gPO(o);
         if (o) return gOPD(o, p);
       }
-    }
+    },
+    wm = typeof WeakMap == 'function' ?
+      new WeakMap :
+      {
+        get: function (a, b) {
+          return hOP.call(a, SECRET) ?
+            a[SECRET] : b;
+        },
+        set: function (a, b) {
+          dP(a, SECRET, {value: b});
+        }
+      }
   ;
 
+  function Observer() {}
+  Observer.prototype = Object.create(null);
+
   function createObserver(object) {
-    var observer = Object.create(null);
+    var observer = new Observer;
     wm.set(object, observer);
     return observer;
   }
@@ -70,29 +72,32 @@ var observer = (function (O) {'use strict';
       configurable: true,
       enumerable: hOP.call(descriptor, 'enumerable') ?
         descriptor.enumerable :
-        (String(prop).charAt(0) !== '_'),
+        (String(prop)[0] !== '_'),
       get: getter,
       set: set
     });
   }
 
   function unwatch(object, prop, callback) {
-    var observer = wm.get(object), i, watcher;
+    var observer = wm.get(object), callbacks, i, watcher;
     if (observer && prop in observer) {
       watcher = observer[prop];
-      i = watcher._.indexOf(callback);
-      if (-1 < i) watcher._.splice(i, 1);
-      if (watcher._.length < 1) {
-        delete observer[prop];
-        if (watcher.d) {
-          dP(object, prop, watcher.d);
-        } else {
-          delete object[prop];
-          object[prop] = watcher.get.call(object);
-        }
-        if (REMOVE_EVENT in object) {
-          object[REMOVE_EVENT]('change', watcher.h, false);
-          object[REMOVE_EVENT]('input', watcher.h, false);
+      callbacks = watcher._;
+      i = callbacks.indexOf(callback);
+      if (-1 < i) {
+        callbacks.splice(i, 1);
+        if (callbacks.length < 1) {
+          delete observer[prop];
+          if (watcher.d) {
+            dP(object, prop, watcher.d);
+          } else {
+            delete object[prop];
+            object[prop] = watcher.get.call(object);
+          }
+          if (REMOVE_EVENT in object) {
+            object[REMOVE_EVENT]('change', watcher.h, false);
+            object[REMOVE_EVENT]('input', watcher.h, false);
+          }
         }
       }
     }

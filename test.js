@@ -53,7 +53,7 @@ if (typeof document) {
   test.async(function (done) {
     var input = document.body.appendChild(document.createElement('input'));
     var value = '';
-    observer.watch(input, 'value', function (prop, prev, curr) {
+    var watcher = observer.watch(input, 'value', function (prop, prev, curr) {
       test(prop === 'value', 'correct name');
       test(prev === value, 'correct old value');
       test(curr === value + '0', 'correct new value');
@@ -62,7 +62,12 @@ if (typeof document) {
     input.value = '0';
     setTimeout(function () {
       input.value += '0';
-      setTimeout(done);
+      setTimeout(function () {
+        watcher.unwatch();
+        done();
+        // for testing purpose only
+        window.observer = observer;
+      }, 1);
     });
   });
 }

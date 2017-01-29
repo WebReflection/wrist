@@ -1,0 +1,34 @@
+{
+  "name": "observer",
+  "version": "0.0.0",
+  "description": "Easy way to bind or react to properties change.",
+  "main": "observer.js",
+  "devDependencies": {
+    "tressa": "^0.2.0",
+    "uglify-js": "^2.7.5"
+  },
+  "scripts": {
+    "build": "npm run minify; npm run size;",
+    "test": "node test.js",
+    "minify": "uglifyjs observer.js --comments=/^!/ --compress --mangle -o observer.min.js",
+    "size": "cat observer.js | wc -c;cat observer.min.js | wc -c;gzip -c observer.min.js | wc -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebReflection/observer.git"
+  },
+  "keywords": [
+    "observer",
+    "watch",
+    "unwatch",
+    "react",
+    "properties",
+    "changes"
+  ],
+  "author": "Andrea Giammarchi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WebReflection/observer/issues"
+  },
+  "homepage": "https://github.com/WebReflection/observer#readme"
+}
