@@ -1,4 +1,4 @@
-# observer
+# observer [![Build Status](https://travis-ci.org/WebReflection/observer.svg?branch=master)](https://travis-ci.org/WebReflection/observer)
 
 Easy way to bind or react to properties change.
 
