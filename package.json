@@ -1,24 +1,25 @@
 {
-  "name": "observer",
-  "version": "0.0.0",
+  "name": "wrist",
+  "version": "0.0.1",
   "description": "Easy way to bind or react to properties change.",
-  "main": "observer.js",
+  "main": "wrist.js",
   "devDependencies": {
     "tressa": "^0.2.0",
     "uglify-js": "^2.7.5"
   },
   "scripts": {
-    "build": "npm run minify; npm run size;",
+    "build": "npm run test && npm run minify && npm run size;",
     "test": "node test.js",
-    "minify": "uglifyjs observer.js --comments=/^!/ --compress --mangle -o observer.min.js",
-    "size": "cat observer.js | wc -c;cat observer.min.js | wc -c;gzip -c observer.min.js | wc -c"
+    "minify": "uglifyjs wrist.js --comments=/^!/ --compress --mangle -o wrist.min.js",
+    "size": "cat wrist.js | wc -c;cat wrist.min.js | wc -c;gzip -c wrist.min.js | wc -c"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WebReflection/observer.git"
+    "url": "git+https://github.com/WebReflection/wrist.git"
   },
   "keywords": [
     "observer",
+    "mutation",
     "watch",
     "unwatch",
     "react",
@@ -28,7 +29,7 @@
   "author": "Andrea Giammarchi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/WebReflection/observer/issues"
+    "url": "https://github.com/WebReflection/wrist/issues"
   },
-  "homepage": "https://github.com/WebReflection/observer#readme"
+  "homepage": "https://github.com/WebReflection/wrist#readme"
 }

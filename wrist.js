@@ -1,5 +1,5 @@
 /*! (C) 2017 Andrea Giammarchi - MIT Style License */
-var observer = (function (O) {'use strict';
+var wrist = (function (O) {'use strict';
   var
     ADD_EVENT = 'addEventListener',
     REMOVE_EVENT = 'removeEventListener',
@@ -28,16 +28,16 @@ var observer = (function (O) {'use strict';
       }
   ;
 
-  function Observer() {}
-  Observer.prototype = Object.create(null);
+  function Wrist() {}
+  Wrist.prototype = Object.create(null);
 
-  function createObserver(object) {
-    var observer = new Observer;
-    wm.set(object, observer);
-    return observer;
+  function createWrist(object) {
+    var wrist = new Wrist;
+    wm.set(object, wrist);
+    return wrist;
   }
 
-  function createWatcher(object, observer, prop) {
+  function createWatcher(object, wrist, prop) {
     var
       set = function ($) {
         var i, length, old;
@@ -63,7 +63,7 @@ var observer = (function (O) {'use strict';
         descriptor.value : getter.call(object)
     ;
 
-    return (observer[prop] = {
+    return (wrist[prop] = {
       // ignored descriptor properties
       _: callbacks,
       d: descriptor === empty ? null : descriptor,
@@ -79,15 +79,15 @@ var observer = (function (O) {'use strict';
   }
 
   function unwatch(object, prop, callback) {
-    var observer = wm.get(object), callbacks, i, watcher;
-    if (observer && prop in observer) {
-      watcher = observer[prop];
+    var wrist = wm.get(object), callbacks, i, watcher;
+    if (wrist && prop in wrist) {
+      watcher = wrist[prop];
       callbacks = watcher._;
       i = callbacks.indexOf(callback);
       if (-1 < i) {
         callbacks.splice(i, 1);
         if (callbacks.length < 1) {
-          delete observer[prop];
+          delete wrist[prop];
           if (watcher.d) {
             dP(object, prop, watcher.d);
           } else {
@@ -106,8 +106,8 @@ var observer = (function (O) {'use strict';
   return {
     watch: function watch(object, prop, callback) {
       var
-        observer = wm.get(object) || createObserver(object),
-        watcher = observer[prop] || createWatcher(object, observer, prop),
+        wrist = wm.get(object) || createWrist(object),
+        watcher = wrist[prop] || createWatcher(object, wrist, prop),
         callbacks = watcher._
       ;
       if (callbacks.indexOf(callback) < 0) {
@@ -125,4 +125,4 @@ var observer = (function (O) {'use strict';
 
 }(Object));
 
-try { module.exports = observer; } catch(o_O) {}
+try { module.exports = wrist; } catch(o_O) {}
