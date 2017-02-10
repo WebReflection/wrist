@@ -1,6 +1,6 @@
 {
   "name": "wrist",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Easy way to bind or react to properties change.",
   "main": "wrist.js",
   "devDependencies": {
