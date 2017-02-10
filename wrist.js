@@ -52,7 +52,7 @@ var wrist = (function (O) {'use strict';
               callbacks[i++].call(object, prop, old, value);
           }
         } else {
-          setter.call(this, value);
+          setter.call(this, $);
         }
       },
       callbacks = [],

@@ -1,7 +1,7 @@
-node_modules/*
 .DS_Store
-.gitignore
 .travis.yml
-index.html
+.gitignore
+coverage/*
+node_modules/*
 test.html
 test.js

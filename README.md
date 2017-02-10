@@ -1,4 +1,5 @@
-# wrist [![Build Status](https://travis-ci.org/WebReflection/wrist.svg?branch=master)](https://travis-ci.org/WebReflection/wrist)
+# wrist [![Build Status](https://travis-ci.org/WebReflection/wrist.svg?branch=master)](https://travis-ci.org/WebReflection/wrist) [![Coverage Status](https://coveralls.io/repos/github/WebReflection/wrist/badge.svg?branch=master)](https://coveralls.io/github/WebReflection/wrist?branch=master)
+
 
 Easy way to bind or react to properties change.
 
