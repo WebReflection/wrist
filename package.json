@@ -14,7 +14,8 @@
     "build": "npm test && npm run minify && npm run size;",
     "test": "istanbul cover test.js",
     "minify": "uglifyjs wrist.js --comments=/^!/ --compress --mangle -o wrist.min.js",
-    "size": "cat wrist.js | wc -c;cat wrist.min.js | wc -c;gzip -c wrist.min.js | wc -c"
+    "size": "cat wrist.js | wc -c;cat wrist.min.js | wc -c;gzip -c wrist.min.js | wc -c",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
