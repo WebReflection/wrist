@@ -3,5 +3,4 @@
 .gitignore
 coverage/*
 node_modules/*
-test.html
-test.js
+test/*

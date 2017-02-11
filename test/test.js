@@ -4,7 +4,7 @@ if (typeof global === 'undefined') window.global = window;
 
 var WeakMap = global.WeakMap;
 delete global.WeakMap;
-var wrist = require('./wrist');
+var wrist = require('../wrist');
 global.WeakMap = WeakMap;
 
 var obj = {defined: true};

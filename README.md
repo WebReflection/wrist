@@ -1,9 +1,9 @@
 # wrist [![Build Status](https://travis-ci.org/WebReflection/wrist.svg?branch=master)](https://travis-ci.org/WebReflection/wrist) [![Coverage Status](https://coveralls.io/repos/github/WebReflection/wrist/badge.svg?branch=master)](https://coveralls.io/github/WebReflection/wrist?branch=master)
 
 
-Easy way to bind or react to properties change.
+An easy way to bind or react to properties change.
 
-It works with `input` like nodes and their `value` too.
+It also works with `input` elements and their `value` too.
 
 ```js
 const watcher = wrist.watch(
@@ -15,6 +15,7 @@ const watcher = wrist.watch(
   // only when property value changes
   function cb(propName, oldVal, newVal) {
     this === generic; // true
+    propName;         // "propertyName"
   }
 );
 
@@ -25,7 +26,7 @@ watcher.unwatch();
 wrist.unwatch(generic, 'propName', cb);
 ```
 
-Each property name can have more than callback registered.
+Each property can have more than one callback registered.
 
 Dual bindings do not interfere with each other.
 
