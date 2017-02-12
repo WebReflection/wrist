@@ -1,25 +1,28 @@
 var wrist = require('../wrist');
 
-const post = {
-  title: 'JS & DOM data bindings in 2017',
+var post = {
+  title: '',
   published: false
 };
 
-const title = document.querySelector('input[name=title]');
-const published = document.querySelector('input[name=published]');
+var title = document.querySelector('input[name=title]');
+var published = document.querySelector('input[name=published]');
 
-wrist.watch(post, 'title', (prop, old, val) => {
+// bind post properties to related inputs
+wrist.watch(post, 'title', function (prop, old, val) {
   title.value = val;
 });
-wrist.watch(post, 'published', (prop, old, val) => {
+wrist.watch(post, 'published', function (prop, old, val) {
   published.checked = val;
 });
 
-wrist.watch(title, 'value', (prop, old, val) => {
+// bind inputs to post related properties
+wrist.watch(title, 'value', function (prop, old, val) {
   post.title = val;
 });
-wrist.watch(published, 'checked', (prop, old, val) => {
+wrist.watch(published, 'checked', function (prop, old, val) {
   post.published = val;
 });
 
+// for testing purpose through console
 global.post = post;
