@@ -9,12 +9,11 @@
       h1 { font-size: 1.2em; }
       input { display: block; margin: 8px auto; }
     </style>
-    <script>window.Promise||document.write('<script src="js-browser/promise-pjs.js"><'+'/script>')</script>
-    <script>process={browser:true}</script>
+    <script defer src="../wrist.min.js"></script>
   </head>
   <body>
     <input name="title">
     <input type="checkbox" name="published">
   </body>
-  <script defer id="common-js" data-main="./post.js" src="https://unpkg.com/common-js@0.3.5/common.js"></script>
+  <script defer src="post.js"></script>
 </html>

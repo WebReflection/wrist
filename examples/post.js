@@ -1,5 +1,3 @@
-var wrist = require('../wrist');
-
 var post = {
   title: '',
   published: false
@@ -23,6 +21,3 @@ wrist.watch(title, 'value', function (prop, old, val) {
 wrist.watch(published, 'checked', function (prop, old, val) {
   post.published = val;
 });
-
-// for testing purpose through console
-global.post = post;

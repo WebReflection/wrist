@@ -1,5 +1,3 @@
-var wrist = require('../wrist');
-
 var input1 = document.body.appendChild(
   document.createElement('input')
 );
@@ -17,10 +15,10 @@ function changeValue2(prop, prev, curr) {
 }
 
 function changeGlobalTest(prop, prev, curr) {
-  global.test[prop] = curr;
+  window.test[prop] = curr;
 }
 
-global.test = {};
+window.test = {};
 
 wrist.watch(input1, 'value', changeValue2);
 wrist.watch(input1, 'value', changeGlobalTest);
@@ -28,9 +26,9 @@ wrist.watch(input1, 'value', changeGlobalTest);
 wrist.watch(input2, 'value', changeValue1);
 wrist.watch(input2, 'value', changeGlobalTest);
 
-wrist.watch(global.test, 'value', changeValue1);
-wrist.watch(global.test, 'value', changeValue2);
+wrist.watch(window.test, 'value', changeValue1);
+wrist.watch(window.test, 'value', changeValue2);
 
-global.test.value = 'change value';
+test.value = 'change value';
 
 try { console.log('try: test.value = 132;'); } catch(o_O) {}
