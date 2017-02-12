@@ -2,7 +2,7 @@
 
 An easy way to bind or react to properties change.
 
-It also works with `input` elements and their `value` too.
+It also works with `input` elements and their `value`, `checked`, or `disabled` too.
 
 ```js
 const watcher = wrist.watch(
@@ -30,6 +30,8 @@ Each property can have more than one callback registered.
 Dual bindings do not interfere with each other.
 
 [Live test page](https://webreflection.github.io/wrist/test/).
+
+[Related post](https://medium.com/@WebReflection/js-dom-data-bindings-in-2017-1545f38cfdc8#.s69edll9v).
 
 - - -
 
