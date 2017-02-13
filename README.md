@@ -29,7 +29,7 @@ Each property can have more than one callback registered.
 
 Dual bindings do not interfere with each other.
 
-[Live test page](https://webreflection.github.io/wrist/test/).
+[Live test page](https://webreflection.github.io/wrist/examples/).
 
 [Related post](https://medium.com/@WebReflection/js-dom-data-bindings-in-2017-1545f38cfdc8#.s69edll9v).
 
