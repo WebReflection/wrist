@@ -33,6 +33,18 @@ Dual bindings do not interfere with each other.
 
 [Related post](https://medium.com/@WebReflection/js-dom-data-bindings-in-2017-1545f38cfdc8#.s69edll9v).
 
+### Compatibility
+
+IE9 Desktop, as well as IE9 Mobile in WP7 are the IE baseline.
+
+Every Desktop browser works, and in Firefox case, even Firefox OS 1 does.
+
+However, old stock browsers found in Android 2~4, WebOS, iOS 5 (OK, not stock but same bug) have a WebKit bug that won't make properties like `input.value` be configurable.
+
+In these cases, other regular, non special attributes, would work, but that's kinda missing the point ow wrist.
+
+If you need to support jurassic mobile browsers, please look elsewhere, apologies.
+
 - - -
 
 (C) 2017 Andrea Giammarchi - MIT Style License
