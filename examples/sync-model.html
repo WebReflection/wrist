@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+
+	<script defer src="../wrist.min.js"></script>
+	<script type="text/javascript" src="SyncModel.js"></script>
+
+</head>
+<body>
+
+<!--
+--------------------
+SyncModel
+--------------------
+Syncronizes a model to any number of other objects or functions. Two-way data binding between objects -- or object -> function. 
+
+By Mike Gieson
+www.gieson.com
+https://github.com/bobtherobot
+-->
+
+
+
+<select id="sel1">
+	<option value="bob">bob</option>
+	<option value="sally">sally</option>
+	<option value="tom">tom</option>
+</select>
+
+<input id="twoWay" type="text" placeholder="two way" />
+<input id="oneWay" type="text" placeholder="one way" /><button id="clickOneWay">set</button>
+<pre id="dump">dump</pre>
+<button id="destroy">destroy</button>
+
+
+
+
+</body>
+
+  <script defer src="sync-model.js"></script>
+</html>
